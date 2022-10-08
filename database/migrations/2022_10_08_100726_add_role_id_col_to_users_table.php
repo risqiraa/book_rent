@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->unsignedBigInteger('role_id'); //add foreign key
+            $table->foreign('role_id')->references('id')->on('roles'); //foreign key role_id kehubung ke clom id di tabel roles
         });
     }
 
@@ -27,8 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            // Schema::enableForeignKeyConstraints();
-            Schema::disableForeignKeyConstraints();
+            $table->dropForeign('users_role_id_foreign'); //ngerollback si foreign key
             $table->dropColumn('role_id');
         });
     }

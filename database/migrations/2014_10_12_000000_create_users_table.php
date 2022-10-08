@@ -13,11 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
+        //membuat tabel users
+        // php artisan make:migration create_users_table
+        //
         Schema::create('users', function (Blueprint $table) {
+            //membuat kolom id dengan colstring
             $table->id();
-            $table->string('username')->unique();
+            //membuat kolom string dan menambahkan atribut unique
+            $table->string('username')->unique(); // apa itu unique?
             $table->string('password');
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable(); // apa itu nullable?
+            //membuat kolom adress tipe text > coltext
             $table->text('address');
             $table->string('status')->default('inactive');
 
