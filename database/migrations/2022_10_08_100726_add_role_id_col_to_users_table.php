@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('phone')->nullable();
-            $table->text('address');
-            $table->string('status')->default('inactive');
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -32,6 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            // Schema::enableForeignKeyConstraints();
+            Schema::disableForeignKeyConstraints();
+            $table->dropColumn('role_id');
+        });
     }
 };
