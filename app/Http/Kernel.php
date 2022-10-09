@@ -63,5 +63,16 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //mendaftarkan middleware ke kernel
+        //Bootstrappers ini mengonfigurasi penanganan kesalahan, mengonfigurasi logging, mendeteksi lingkungan aplikasi ,
+        //dan melakukan tugas lain yang perlu dilakukan sebelum permintaan benar-benar ditangani.
+        //Biasanya, kelas-kelas ini menangani konfigurasi Laravel internal yang tidak perlu Anda khawatirkan.
+
+        //Kernel HTTP juga mendefinisikan daftar middleware HTTP yang harus dilalui oleh semua permintaan
+        //sebelum ditangani oleh aplikasi. Middleware ini menangani membaca dan menulis sesi HTTP ,
+        //menentukan apakah aplikasi dalam mode pemeliharaan, memverifikasi token CSRF , dan banyak lagi.
+        'only_admin' => \App\Http\Middleware\OnlyAdmin::class,
+        'only_client' => \App\Http\Middleware\OnlyClient::class,
+        'only_guest' => \App\Http\Middleware\OnlyGuest::class,
     ];
 }
